@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/drawer.dart';
 
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
@@ -9,6 +10,7 @@ class PaymentsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Ventas"),
       ),
+      drawer: const DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
