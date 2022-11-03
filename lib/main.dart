@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/payments.dart';
-import 'pages/login.dart';
+import 'package:ventas/app.dart';
 
 void main() {
-  runApp(const MaterialApp(title: "Ventas a domicilio", home: PaymentsPage()));
+  runApp(const MyApp());
 }
