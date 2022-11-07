@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
+import 'new_sale.dart';
 
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final lista = _listarCobros();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ventas"),
@@ -14,37 +17,53 @@ class PaymentsPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Cobros"),
+            const Text(
+              "Cobros",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             Expanded(
-              child: ListView(
-                children: [
-                  ListTile(
-                    leading: const CircleAvatar(),
-                    title: const Text("Cristian Quesada"),
-                    subtitle: const Text("Dirección"),
-                    onTap: () {},
+              child: ListView.builder(
+                itemCount: lista.length,
+                itemBuilder: (context, index) => ListTile(
+                  leading: const CircleAvatar(),
+                  title: Text(lista[index]),
+                  subtitle: const Text("Dirección"),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.phone),
+                    onPressed: () {
+                      // TODO: Realizar la llamada telefonica
+                    },
                   ),
-                  ListTile(
-                    leading: const CircleAvatar(),
-                    title: const Text("Juan José Quesada"),
-                    subtitle: const Text("Dirección"),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: const CircleAvatar(),
-                    title: const Text("Alberto Diaz"),
-                    subtitle: const Text("Dirección"),
-                    onTap: () {},
-                  ),
-                ],
+                  onTap: () {
+                    //TODO: Ir a la ventana de cobro
+                  },
+                ),
               ),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add_shopping_cart), onPressed: () {}),
+        child: const Icon(Icons.add_shopping_cart),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewSalePage(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  List<String> _listarCobros() {
+    // TODO: Traer la lista de cobros del día de la BD
+    return List<String>.generate(
+      10,
+      (index) => "Usuario Compra ${index + 1}",
     );
   }
 }
