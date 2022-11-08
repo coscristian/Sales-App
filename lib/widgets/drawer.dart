@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ventas/pages/cash_close.dart';
-import 'package:ventas/pages/payments.dart';
+import '../pages/cash_close.dart';
+import '../pages/payments.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
