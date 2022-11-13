@@ -3,7 +3,10 @@ import '../widgets/drawer.dart';
 import 'new_sale.dart';
 
 class PaymentsPage extends StatelessWidget {
-  const PaymentsPage({super.key});
+  final String email;
+  final String name;
+
+  const PaymentsPage({super.key, required this.email, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class PaymentsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Ventas"),
       ),
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(email: email, name: name),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

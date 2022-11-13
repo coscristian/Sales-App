@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:ventas/pages/payments.dart';
+import '../../controller/login.dart';
+import '../../controller/request/login.dart';
+import 'payments.dart';
 
 class LoginPage extends StatelessWidget {
   final _imageUrl = "assets/images/imagenventas.jpg";
+  late LoginController _controller;
+  late LoginRequest _request; // Define una variable
 
-  const LoginPage({super.key});
+  LoginPage({super.key}) {
+    _controller = LoginController();
+    _request = LoginRequest();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +73,23 @@ class LoginPage extends StatelessWidget {
             ),
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                // TODO: Validar usuario y contraseña en BBDD
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PaymentsPage(),
-                  ),
-                );
+                // Guarde todos los campos del formulario
+                formKey.currentState!.save();
+                try {
+                  // Validar correo y clave en BBDD
+                  var name = _controller.validateEmailPassword(_request);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          PaymentsPage(email: _request.email, name: name),
+                    ),
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(e.toString())));
+                }
               }
             },
           ),
@@ -98,6 +115,10 @@ class LoginPage extends StatelessWidget {
         }
         return null;
       },
+      onSaved: (value) {
+        // Guarde la clave en el modelo del login request
+        _request.password = value!;
+      },
     );
   }
 
@@ -118,6 +139,10 @@ class LoginPage extends StatelessWidget {
           return "El correo tiene un formato invalido";
         }
         return null;
+      },
+      onSaved: (value) {
+        // Guarde el correo en el modelo del login request
+        _request.email = value!;
       },
     );
   }

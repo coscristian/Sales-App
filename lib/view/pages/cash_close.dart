@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ventas/widgets/drawer.dart';
+import 'package:ventas/view/widgets/drawer.dart';
 
 class CashClosePage extends StatelessWidget {
   const CashClosePage({super.key});
@@ -10,7 +10,7 @@ class CashClosePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Cierre de caja"),
       ),
-      drawer: const DrawerWidget(),
+      drawer: const DrawerWidget(email: "", name: ""),
     );
   }
 }

@@ -3,7 +3,10 @@ import '../pages/cash_close.dart';
 import '../pages/payments.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({super.key});
+  final String email;
+  final String name;
+
+  const DrawerWidget({super.key, required this.email, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class DrawerWidget extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PaymentsPage(),
+                  builder: (context) => PaymentsPage(email: email, name: name),
                 ),
               );
             },
@@ -54,51 +57,45 @@ class DrawerWidget extends StatelessWidget {
         ],
       ),
     );
-  } /*
-Text(
-              'Drawer Header',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-            */
+  }
 
   Widget _header() {
     //TODO: Consultar los datos de la cabecera
 
     const image = Icon(Icons.manage_accounts);
-    const name = "Cristian Quesada";
-    const email = "crisquesadaco@gmail.com";
 
     return Row(
       children: [
         const CircleAvatar(
-          child: image,
           radius: 30,
+          child: image,
         ),
         const SizedBox(
           width: 8,
         ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(email,
-                style: TextStyle(
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: const TextStyle(
                   color: Colors.white,
-                )),
-          ],
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                email,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
