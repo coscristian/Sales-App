@@ -13,8 +13,4 @@ class UserEntity {
       this.phone,
       this.password,
       this.isAdmin});
-
-  
-
-  
 }

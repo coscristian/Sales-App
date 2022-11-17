@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "218329868998",
+    "project_id": "mt2022-ventas-b4ea5",
+    "storage_bucket": "mt2022-ventas-b4ea5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218329868998:android:01bc99f35bd4075040c5c7",
+        "android_client_info": {
+          "package_name": "com.example.ventas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218329868998-hejl2uauunafed1amop3jksaj24b6sa7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF4lPaaRiYQ1HhWq76Z5rgZEWTCHpTIPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218329868998-hejl2uauunafed1amop3jksaj24b6sa7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

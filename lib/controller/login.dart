@@ -17,7 +17,6 @@ class LoginController {
     if (user.password != request.password) {
       throw Exception("Credenciales inválidas");
     }
-
     return user.name!;
   }
 }
