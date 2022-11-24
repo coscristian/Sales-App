@@ -9,7 +9,6 @@ class UserRepository {
       name: "Cristian Quesada Cossio",
       address: "Tinajas",
       isAdmin: true,
-      password: "123456",
       phone: "3207101556",
     );
     _users["laura@gmail.com"] = UserEntity(
@@ -17,7 +16,6 @@ class UserRepository {
       name: "Laura Cristina Pachecho",
       address: "Birmania",
       isAdmin: false,
-      password: "12345678",
       phone: "3104135841",
     );
   }
@@ -29,5 +27,9 @@ class UserRepository {
       throw Exception("Usuario no existe");
     }
     return user;
+  }
+
+  void save(UserEntity user) {
+    print(user);
   }
 }

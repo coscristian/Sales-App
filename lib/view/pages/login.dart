@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ventas/view/pages/register.dart';
 import '../../controller/login.dart';
 import '../../controller/request/login.dart';
 import 'payments.dart';
@@ -25,7 +26,14 @@ class LoginPage extends StatelessWidget {
               _formulario(context),
               _inicioAlternativo(),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterPage(),
+                    ),
+                  );
+                },
                 child: const Text("No tiene usuario, Registrate aquí"),
               ),
             ],
@@ -71,13 +79,13 @@ class LoginPage extends StatelessWidget {
               "Iniciar Sesión",
               style: TextStyle(fontSize: 24),
             ),
-            onPressed: () {
+            onPressed: () async {
               if (formKey.currentState!.validate()) {
                 // Guarde todos los campos del formulario
                 formKey.currentState!.save();
                 try {
                   // Validar correo y clave en BBDD
-                  var name = _controller.validateEmailPassword(_request);
+                  var name = await _controller.validateEmailPassword(_request);
 
                   Navigator.push(
                     context,
