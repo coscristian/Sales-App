@@ -1,35 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../entity/user.dart';
 
 class UserRepository {
-  final _users = <String, UserEntity>{};
+  late final CollectionReference _collection;
 
   UserRepository() {
-    _users["crisquesadaco@gmail.com"] = UserEntity(
-      email: "crisquesadaco@gmail.com",
-      name: "Cristian Quesada Cossio",
-      address: "Tinajas",
-      isAdmin: true,
-      phone: "3207101556",
-    );
-    _users["laura@gmail.com"] = UserEntity(
-      email: "laura@gmail.com",
-      name: "Laura Cristina Pachecho",
-      address: "Birmania",
-      isAdmin: false,
-      phone: "3104135841",
-    );
+    _collection = FirebaseFirestore.instance.collection("users");
   }
 
-  UserEntity findByEmail(String email) {
-    var user = _users[email];
+  Future<UserEntity> findByEmail(String email) async {
+    final query = await _collection
+        .where("email", isEqualTo: email) // COndición para la consulta
+        .withConverter(  // Devuelve el objeto no el mapa
+            fromFirestore: UserEntity.fromFirestore,
+            toFirestore: (value, options) => value.toFirestore())        
+        .get(); // Haga la busqueda
 
-    if (user == null) {
-      throw Exception("Usuario no existe");
+    var users = await query.docs  // Tome los documentos
+        .cast() // Conviertalos a una lista
+        .map((e) => e.data()); // A cada uno de los objetos, obtenga la información
+
+    if (users.isEmpty) {
+      return Future.error("Usuario no existe");
     }
-    return user;
+
+    return users.first;
   }
 
-  void save(UserEntity user) {
-    print(user);
+  Future<void> save(UserEntity user) async {
+    await _collection
+        .withConverter(
+            fromFirestore: UserEntity.fromFirestore,
+            toFirestore: (value, options) => value.toFirestore())
+        .add(user); // Mapa con toda la informacion que quiero guardar
   }
 }

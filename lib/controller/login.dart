@@ -19,7 +19,7 @@ class LoginController {
     await _authRepository.signInEmailPassword(request.email, request.password);
 
     // Consultar el usuario que tenga el correo dado
-    var user = _userRepository.findByEmail(request.email);
+    var user = await _userRepository.findByEmail(request.email);
 
     return user.name!;
   }
